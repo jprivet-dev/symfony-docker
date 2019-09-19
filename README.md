@@ -58,7 +58,7 @@ As example, an override could look like this:
 version: '3.4'
 
 services:
-  php:
+  app:
     build:
       context: .
       target: symfony_docker_php_dev
@@ -79,15 +79,17 @@ services:
 Then run:
 
 ````bash
-docker-compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+docker-compose up -d
 ````
+
+If `docker-compose.yaml` and a `docker-compose.override.yaml` are present on the same directory level, Docker Compose combines the two files into a single configuration, applying the configuration in the `docker-compose.override.yaml` file over and in addition to the values in the `docker-compose.yaml` file.
 
 ### Troubleshooting
 
 Inspect the installation with the following command. The requested Xdebug version should be displayed in the output.
 
 ```bash
-$ docker-compose exec php php --version
+$ docker-compose exec app php --version
 
 PHP 7.2.8 (cli) (built: Jul 21 2018 08:09:37) ( NTS )
 Copyright (c) 1997-2018 The PHP Group
